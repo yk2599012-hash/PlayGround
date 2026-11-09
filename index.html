@@ -1,0 +1,152 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
+<meta name="theme-color" content="#101a3c">
+<link rel="icon" href="data:,">
+<title>PAVITRA — Mumbai Web Runner</title>
+<style>
+:root{color-scheme:dark;--cyan:#6cf5ed;--pink:#ff557c;--ink:#09152f}*{box-sizing:border-box}html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#101a3c;font-family:Inter,ui-rounded,system-ui,-apple-system,Segoe UI,sans-serif;touch-action:none;user-select:none;-webkit-user-select:none}#game{position:fixed;inset:0}canvas{display:block;width:100%;height:100%}.vignette{position:fixed;inset:0;pointer-events:none;background:linear-gradient(180deg,rgba(8,17,43,.43),transparent 25%,transparent 62%,rgba(8,17,43,.38)),radial-gradient(ellipse at center,transparent 35%,rgba(7,14,34,.28) 100%);z-index:1}.hud{position:fixed;z-index:3;inset:0;padding:calc(env(safe-area-inset-top) + 18px) 20px calc(env(safe-area-inset-bottom) + 14px);pointer-events:none;display:flex;flex-direction:column;justify-content:space-between}.topbar{display:flex;align-items:flex-start;justify-content:space-between;gap:12px}.brand{display:flex;align-items:center;gap:10px;text-shadow:0 2px 12px #111a40}.mark{width:37px;height:37px;border:1px solid #aafcf299;background:#56e9e71c;border-radius:12px;display:grid;place-items:center;color:var(--cyan);font-size:21px;font-weight:900;box-shadow:0 0 24px #38d8e52b}.brand-title{font-size:13px;font-weight:900;letter-spacing:.18em}.brand-sub{font-size:9px;color:#c3d6e8aa;letter-spacing:.16em;margin-top:3px}.stats{display:flex;gap:8px}.pill{min-width:76px;text-align:center;padding:8px 12px;background:#101b3b99;border:1px solid #d5faff25;border-radius:13px;backdrop-filter:blur(12px);box-shadow:0 5px 20px #0002}.pill small{display:block;font-size:8px;letter-spacing:.16em;color:#a8bed2;text-transform:uppercase}.pill b{font-size:17px;line-height:1.35;color:#fff}.pill .coin{color:#ffd86c}.bottom{display:flex;align-items:flex-end;justify-content:space-between}.hint{font-size:10px;letter-spacing:.12em;color:#e3eff0a8;text-shadow:0 2px 6px #000}.controls{pointer-events:auto;display:flex;align-items:flex-end;gap:9px}.control{width:59px;height:59px;border:1px solid #ddfaff45;border-radius:19px;background:linear-gradient(145deg,#263a64b8,#101a35bd);box-shadow:0 8px 25px #0004,inset 0 1px #fff2;color:#fff;display:grid;place-items:center;font-size:21px;font-weight:700;backdrop-filter:blur(10px);-webkit-tap-highlight-color:transparent;touch-action:none}.control:active,.control.pressed{transform:scale(.94);background:#38c9d77a;border-color:#a1ffff}.control.special{width:67px;height:67px;color:#a9fff1;border-color:#72f9e96b;font-size:10px;letter-spacing:.1em;line-height:1.3;text-align:center}.control.jump{color:#ffd36b;border-color:#ffd36b66}.center{position:fixed;z-index:5;inset:0;display:grid;place-items:center;padding:20px;pointer-events:auto;background:linear-gradient(180deg,#07112b42,#07112b35)}.center.hidden{display:none}.card{width:min(410px,100%);padding:30px 28px 25px;text-align:center;border-radius:26px;background:linear-gradient(155deg,#15264beF,#10172eef);border:1px solid #dffcff30;box-shadow:0 25px 80px #02081799,inset 0 1px #fff2;backdrop-filter:blur(18px);position:relative;overflow:hidden}.card:before{content:"";position:absolute;width:240px;height:190px;background:#2de0d31b;filter:blur(55px);top:-130px;left:25%}.eyebrow{font-size:9px;letter-spacing:.3em;color:var(--cyan);font-weight:800}.card h1{font-size:clamp(34px,10vw,50px);line-height:.98;letter-spacing:-.055em;margin:12px 0 8px;color:#fff}.card h1 em{font-style:normal;color:var(--cyan)}.card p{font-size:13px;line-height:1.6;color:#c2d1e1;margin:13px 0 20px}.how{display:flex;gap:7px;justify-content:center;flex-wrap:wrap;margin:15px 0 22px}.how span{border:1px solid #d9faff23;background:#d9faff0b;padding:7px 10px;border-radius:10px;font-size:10px;color:#e5f1f3}.cta{border:0;border-radius:14px;padding:14px 26px;background:linear-gradient(100deg,#67f4dc,#52d8ee);color:#082339;font-size:12px;font-weight:900;letter-spacing:.16em;box-shadow:0 8px 28px #47e5db44;min-width:190px}.cta:active{transform:scale(.97)}.record{font-size:10px;color:#9eb0c7;margin-top:15px;letter-spacing:.1em}.toast{position:fixed;z-index:4;top:24%;left:50%;transform:translate(-50%,-10px);background:#101a3ddd;border:1px solid #76f9e866;border-radius:30px;padding:9px 16px;font-size:11px;letter-spacing:.12em;color:#b9fff1;opacity:0;transition:.3s;pointer-events:none}.toast.show{opacity:1;transform:translate(-50%,0)}@media(max-width:600px){.hud{padding-left:14px;padding-right:14px}.brand-title{font-size:11px}.brand-sub{font-size:8px}.mark{width:33px;height:33px}.pill{min-width:61px;padding:7px 9px}.pill b{font-size:15px}.hint{max-width:120px;font-size:9px;line-height:1.5}.control{width:54px;height:54px;border-radius:17px}.control.special{width:62px;height:62px}.controls{gap:7px}.card{padding:27px 22px 23px}}
+</style>
+</head>
+<body>
+<div id="game"></div><div class="vignette"></div>
+<div class="hud">
+  <div class="topbar"><div class="brand"><div class="mark">✦</div><div><div class="brand-title">PAVITRA</div><div class="brand-sub">MUMBAI WEB RUNNER</div></div></div><div class="stats"><div class="pill"><small>Distance</small><b id="distance">0 m</b></div><div class="pill"><small>Orbs</small><b class="coin" id="orbs">0</b></div></div></div>
+  <div class="bottom"><div class="hint" id="hint">DODGE · JUMP · SWING<br>THE CITY IS YOURS</div><div class="controls"><button class="control" id="left" aria-label="Move left">‹</button><button class="control" id="right" aria-label="Move right">›</button><button class="control jump" id="jump" aria-label="Jump">↑</button><button class="control special" id="swing" aria-label="Hold to swing">WEB<br>SWING</button></div></div>
+</div>
+<div class="toast" id="toast">WEB SWING!</div>
+<div class="center" id="panel"><div class="card"><div class="eyebrow">A MUMBAI ROOFTOP RUN</div><h1>THE CITY<br>IS YOUR <em>WEB.</em></h1><p>Swing between the rooftops, scoop up prana orbs, and see how far you can fly.</p><div class="how"><span>← → steer</span><span>↑ jump</span><span>hold WEB to swing</span></div><button class="cta" id="start">START RUNNING&nbsp; ↗</button><div class="record" id="record">YOUR BEST&nbsp; · &nbsp;0 M</div></div></div>
+<script type="module">
+import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.169.0/build/three.module.js';
+
+const mount=document.querySelector('#game');
+const scene=new THREE.Scene();scene.background=new THREE.Color(0x17284e);scene.fog=new THREE.Fog(0x17284e,28,125);
+const camera=new THREE.PerspectiveCamera(62,innerWidth/innerHeight,.1,180);
+camera.position.set(0,4.2,8.5);
+const renderer=new THREE.WebGLRenderer({antialias:true,alpha:false});renderer.setPixelRatio(Math.min(devicePixelRatio,1.7));renderer.setSize(innerWidth,innerHeight);renderer.shadowMap.enabled=true;renderer.shadowMap.type=THREE.PCFSoftShadowMap;renderer.toneMapping=THREE.ACESFilmicToneMapping;renderer.toneMappingExposure=1.15;mount.appendChild(renderer.domElement);
+scene.add(new THREE.HemisphereLight(0xb9e8ff,0x211c42,2.1));
+const key=new THREE.DirectionalLight(0xffdfc4,3.2);key.position.set(-5,12,8);key.castShadow=true;key.shadow.mapSize.set(1024,1024);scene.add(key);
+const rim=new THREE.DirectionalLight(0x54f2ed,2.6);rim.position.set(5,5,-12);scene.add(rim);
+const mat=(color,roughness=.7,metalness=0,emissive=0x000000)=>new THREE.MeshStandardMaterial({color,roughness,metalness,emissive,emissiveIntensity:.7});
+const mats={road:mat(0x1b2440,.92),side:mat(0x293552),blue:mat(0x126cc6,.5,.18),red:mat(0xe83e58,.44,.12),dark:mat(0x101a36),white:mat(0xe8ffff,.25,.1,0x6bbbe0),gold:mat(0xffcf5a,.3,.2,0xffac20),window:mat(0x62dce8,.26,.2,0x1a98b8),pink:mat(0xff5175,.4,.1,0xff2856)};
+function box(parent,x,y,z,sx,sy,sz,material){const o=new THREE.Mesh(new THREE.BoxGeometry(sx,sy,sz),material);o.position.set(x,y,z);o.castShadow=true;o.receiveShadow=true;parent.add(o);return o}
+function ball(parent,x,y,z,r,material,sx=1,sy=1,sz=1){const o=new THREE.Mesh(new THREE.SphereGeometry(r,14,10),material);o.position.set(x,y,z);o.scale.set(sx,sy,sz);o.castShadow=true;parent.add(o);return o}
+
+// Road and bright lane marks
+const road=box(scene,0,-.17,-48,10,.3,120,mats.road);road.receiveShadow=true;
+const sidewalkMat=mat(0x34415c);
+box(scene,-5.35,-.1,-48,.7,.42,120,sidewalkMat);box(scene,5.35,-.1,-48,.7,.42,120,sidewalkMat);
+const laneMat=new THREE.MeshBasicMaterial({color:0x70dce3,transparent:true,opacity:.48});
+const laneMarks=[];
+for(let lane=-1;lane<=1;lane++){
+  const line=new THREE.Mesh(new THREE.BoxGeometry(.045,.018,2.6),laneMat);line.position.set(lane*2.15,.0,-3);scene.add(line);laneMarks.push(line);
+}
+const groundGlow=new THREE.PointLight(0x38d8d0,8,18);groundGlow.position.set(0,1,-7);scene.add(groundGlow);
+
+// Tower blocks, inset windows, rooftop silhouettes: all procedural, no external assets.
+const city=[];const buildingColors=[0x243658,0x303451,0x263e59,0x393552,0x1d3853,0x3c465e];
+function makeBuilding(x,z,side){
+  const group=new THREE.Group(),w=2+Math.random()*2.2,h=7+Math.random()*18,d=5+Math.random()*5;
+  group.position.set(x,0,z);scene.add(group);
+  const baseMat=mat(buildingColors[Math.floor(Math.random()*buildingColors.length)],.83);
+  box(group,0,h/2,0,w,h,d,baseMat);
+  const winMat=new THREE.MeshBasicMaterial({color:[0x53cde0,0xffc56b,0x95a6d9][Math.floor(Math.random()*3)],transparent:true,opacity:.52});
+  for(let yy=1.5;yy<h-1;yy+=1.55)for(let xx=-w/2+.48;xx<w/2-.2;xx+=.66){
+    const win=new THREE.Mesh(new THREE.PlaneGeometry(.31,.56),winMat);win.position.set(xx,yy,d/2+.012);group.add(win);
+    if(Math.random()>.35){const win2=win.clone();win2.rotation.y=Math.PI;win2.position.set(xx,yy,-d/2-.012);group.add(win2)}
+  }
+  if(Math.random()>.55)box(group,0,h+.3,0,w*.45,.6,d*.55,mat(0x47556c));
+  city.push({group,side});
+}
+for(let i=0;i<13;i++){const z=-i*10-8;makeBuilding(-8.1,z,-1);makeBuilding(8.1,z,1)}
+
+// Hero silhouette, fully procedural and articulated for a running/swinging pose.
+const hero=new THREE.Group();scene.add(hero);hero.position.set(0,.1,0);
+const body=new THREE.Group();hero.add(body);
+ball(body,0,1.26,0,.37,mats.blue,.78,1.2,.62);
+box(body,0,1.04,0,.48,.42,.45,mats.red);
+// chest emblem: luminous little lotus-star
+const emblem=ball(body,0,1.37,.293,.105,mats.white,1,.65,.3);
+const neck=ball(body,0,1.67,0,.13,mats.red,1,.9,.9);
+const head=ball(body,0,1.98,0,.31,mats.red,.88,1.03,.86);
+// mask eyes
+for(const s of [-1,1]){const eye=ball(body,s*.13,2.015,.247,.095,mats.white,.72,1.15,.26);eye.rotation.z=s*.28;}
+// Hood-like blue crown accent + red shoulder bands
+for(const s of [-1,1]){
+  ball(body,s*.33,1.48,0,.16,mats.red,1.2,.75,.9);
+  const arm=new THREE.Group();arm.position.set(s*.36,1.47,0);body.add(arm);
+  const upper=box(arm,s*.1,-.28,0,.2,.52,.22,mats.blue);upper.rotation.z=-s*.18;
+  const glove=ball(arm,s*.18,-.56,.04,.14,mats.red,.9,1,.9);
+  arm.userData.side=s;hero.userData.arms??=[];hero.userData.arms.push(arm);
+}
+const legs=[];
+for(const s of [-1,1]){const leg=new THREE.Group();leg.position.set(s*.15,.83,0);body.add(leg);box(leg,0,-.25,0,.22,.52,.25,mats.blue);ball(leg,0,-.5,.1,.15,mats.red,1.2,.6,1.65);legs.push(leg)}
+// Back web can be shown when swing is held.
+const webMat=new THREE.LineBasicMaterial({color:0x94fff4,transparent:true,opacity:.95});
+const webGeo=new THREE.BufferGeometry().setFromPoints([new THREE.Vector3(.26,1.48,0),new THREE.Vector3(2.4,8,-17)]);
+const webLine=new THREE.Line(webGeo,webMat);webLine.visible=false;scene.add(webLine);
+const webAnchor=new THREE.Mesh(new THREE.IcosahedronGeometry(.12,1),new THREE.MeshBasicMaterial({color:0xa8fff2}));scene.add(webAnchor);webAnchor.visible=false;
+
+// Floating pickups and chunky rooftop hazards
+const objects=[];const orbGeo=new THREE.IcosahedronGeometry(.28,1);
+function addOrb(x,z){const mesh=new THREE.Mesh(orbGeo,mats.gold);mesh.position.set(x,1.45,z);mesh.castShadow=true;scene.add(mesh);objects.push({mesh,type:'orb',z})}
+function addHazard(x,z,type){const group=new THREE.Group();group.position.set(x,0,z);scene.add(group);
+  if(type==='vent'){box(group,0,.46,0,.9,.92,.82,mat(0x8490a2,.65));box(group,0,.95,0,1.02,.12,.9,mat(0xff8b72,.4,.1,0x6b1815))}
+  else if(type==='crate'){box(group,0,.52,0,.95,1.04,.92,mat(0xa34b56,.7));box(group,0,.53,.47,.12,.82,.04,mat(0xf7b66b,.5))}
+  else {box(group,0,1.05,0,1.12,2.1,.24,mat(0x3fdbd4,.38,.2,0x178b91));box(group,0,1.07,.15,.68,1.58,.08,mat(0x15233c,.4))}
+  objects.push({mesh:group,type:'hazard',z})}
+for(let row=0;row<8;row++){
+ const z=-18-row*14,lane=Math.floor(Math.random()*3)-1;
+ if(row%3===0){addHazard(lane*2.15,z,'gate');addOrb((lane===1?0:1)*2.15,z-4);addOrb((lane===-1?0:-1)*2.15,z-7)}
+ else {addHazard(lane*2.15,z,['vent','crate'][Math.floor(Math.random()*2)]);const safe=[-1,0,1].filter(n=>n!==lane);for(let j=0;j<3;j++)addOrb(safe[j%safe.length]*2.15,z-3-j*2.25)}
+}
+
+let state='ready',lane=0,playerY=.1,verticalSpeed=0,swinging=false,runTime=0,distance=0,orbs=0,speed=11,nextSpawn=-130,toastTimer=0;
+let best=Number(localStorage.getItem('pavitraBest')||0);
+const panel=document.querySelector('#panel'),startButton=document.querySelector('#start'),distanceEl=document.querySelector('#distance'),orbsEl=document.querySelector('#orbs'),recordEl=document.querySelector('#record'),hint=document.querySelector('#hint'),toast=document.querySelector('#toast');
+recordEl.textContent=`YOUR BEST  ·  ${best} M`;
+function moveLane(dir){if(state!=='running')return;lane=THREE.MathUtils.clamp(lane+dir,-1,1)}
+function jump(){if(state!=='running')return;if(playerY<.17){verticalSpeed=7.6;playerY=.18;playTick(230,.045)}}
+function setSwing(on){swinging=on;if(on&&state==='running'){toast.classList.add('show');toastTimer=.75}}
+function begin(){state='running';lane=0;playerY=.1;verticalSpeed=0;distance=0;orbs=0;speed=11;runTime=0;nextSpawn=-130;orbsEl.textContent='0';distanceEl.textContent='0 m';for(const o of objects){scene.remove(o.mesh);disposeObject(o.mesh)}objects.length=0;for(let r=0;r<8;r++)spawnRow(-18-r*14,r);panel.classList.add('hidden');hint.innerHTML='DODGE · JUMP · SWING<br>THE CITY IS YOURS'}
+function spawnRow(z,row){const which=Math.floor(Math.random()*3)-1;if(row%4===0){addHazard(which*2.15,z,'gate');const safe=[-1,0,1].filter(i=>i!==which);addOrb(safe[0]*2.15,z-3);addOrb(safe[1]*2.15,z-5.5)}else{addHazard(which*2.15,z,Math.random()>.5?'vent':'crate');for(let j=0;j<3;j++)addOrb((Math.floor(Math.random()*3)-1)*2.15,z-2-j*2)}}
+function disposeObject(obj){obj.traverse?.(o=>{if(o.geometry)o.geometry.dispose();if(o.material&&!Array.isArray(o.material))o.material.dispose()})}
+function gameOver(){if(state!=='running')return;state='over';swinging=false;webLine.visible=false;webAnchor.visible=false;best=Math.max(best,Math.floor(distance));localStorage.setItem('pavitraBest',best);recordEl.textContent=`BEST ${best} M  ·  RUN ${Math.floor(distance)} M`;document.querySelector('.eyebrow').textContent='RUN COMPLETE';document.querySelector('.card h1').innerHTML='NICE RUN,<br><em>HERO.</em>';document.querySelector('.card p').textContent=`You swept up ${orbs} prana orbs across ${Math.floor(distance)} metres of Mumbai rooftops.`;document.querySelector('.how').innerHTML='<span>Tap restart and try again</span><span>Can you beat your best?</span>';startButton.innerHTML='RUN IT BACK&nbsp; ↗';panel.classList.remove('hidden');playTick(120,.18)}
+startButton.addEventListener('click',()=>{document.querySelector('.eyebrow').textContent='A MUMBAI ROOFTOP RUN';document.querySelector('.card h1').innerHTML='THE CITY<br>IS YOUR <em>WEB.</em>';document.querySelector('.card p').textContent='Swing between the rooftops, scoop up prana orbs, and see how far you can fly.';document.querySelector('.how').innerHTML='<span>← → steer</span><span>↑ jump</span><span>hold WEB to swing</span>';begin()});
+document.querySelector('#left').addEventListener('pointerdown',e=>{e.preventDefault();moveLane(-1)});
+document.querySelector('#right').addEventListener('pointerdown',e=>{e.preventDefault();moveLane(1)});
+document.querySelector('#jump').addEventListener('pointerdown',e=>{e.preventDefault();jump()});
+const swingButton=document.querySelector('#swing');swingButton.addEventListener('pointerdown',e=>{e.preventDefault();swingButton.classList.add('pressed');swingButton.setPointerCapture(e.pointerId);setSwing(true)});
+for(const ev of ['pointerup','pointercancel','lostpointercapture'])swingButton.addEventListener(ev,()=>{swingButton.classList.remove('pressed');setSwing(false)});
+window.addEventListener('keydown',e=>{if(['ArrowLeft','ArrowRight','ArrowUp',' ','a','d','w'].includes(e.key))e.preventDefault();if(e.repeat)return;if(e.key==='ArrowLeft'||e.key==='a')moveLane(-1);if(e.key==='ArrowRight'||e.key==='d')moveLane(1);if(e.key==='ArrowUp'||e.key==='w'||e.key===' ')jump();if(e.key==='Shift'||e.key==='s')setSwing(true);if(e.key==='Enter'&&state!=='running')startButton.click()});
+window.addEventListener('keyup',e=>{if(e.key==='Shift'||e.key==='s')setSwing(false)});
+let audioContext=null;function playTick(freq,duration){try{audioContext??=new AudioContext();const osc=audioContext.createOscillator(),gain=audioContext.createGain();osc.type='sine';osc.frequency.value=freq;gain.gain.setValueAtTime(.055,audioContext.currentTime);gain.gain.exponentialRampToValueAtTime(.001,audioContext.currentTime+duration);osc.connect(gain);gain.connect(audioContext.destination);osc.start();osc.stop(audioContext.currentTime+duration)}catch{}}
+
+const moon=new THREE.Mesh(new THREE.SphereGeometry(2.1,24,16),new THREE.MeshBasicMaterial({color:0xffd998}));moon.position.set(-18,20,-82);scene.add(moon);
+const stars=new THREE.Group();scene.add(stars);for(let i=0;i<95;i++){const dot=new THREE.Mesh(new THREE.SphereGeometry(.035+Math.random()*.045,6,5),new THREE.MeshBasicMaterial({color:Math.random()>.6?0x8beef5:0xffd59a,transparent:true,opacity:.6+Math.random()*.4}));dot.position.set((Math.random()-.5)*95,6+Math.random()*32,-35-Math.random()*100);stars.add(dot)}
+let last=performance.now();
+function update(now){requestAnimationFrame(update);const dt=Math.min((now-last)/1000,.04);last=now;runTime+=dt;
+ if(state==='running'){
+  distance+=speed*dt;speed=Math.min(19,11+distance*.012);const advance=speed*dt;
+  for(const item of objects){item.z+=advance;item.mesh.position.z=item.z;if(item.type==='orb'){item.mesh.rotation.y+=dt*2.2;item.mesh.rotation.x+=dt*1.1;item.mesh.position.y=1.45+Math.sin(runTime*4+item.z)*.13;if(Math.abs(item.z)<.85&&Math.abs(item.mesh.position.x-lane*2.15)<1.02&&Math.abs(item.mesh.position.y-(playerY+1.35))<1.6){orbs++;orbsEl.textContent=orbs;item.z=999;scene.remove(item.mesh);playTick(700+Math.min(orbs,15)*24,.07)}}else if(Math.abs(item.z)<.72&&Math.abs(item.mesh.position.x-lane*2.15)<1.05){const tall=item.mesh.children[0]?.geometry.parameters.height>1.5;if(tall||playerY<1.45)gameOver()}}
+  for(let i=objects.length-1;i>=0;i--)if(objects[i].z>13||objects[i].z===999){scene.remove(objects[i].mesh);objects.splice(i,1)}
+  while(nextSpawn>-distance-105){spawnRow(nextSpawn,Math.floor(Math.abs(nextSpawn)/14));nextSpawn-=14}
+  for(const b of city){b.group.position.z+=advance;if(b.group.position.z>18)b.group.position.z-=130}
+  for(const line of laneMarks){line.position.z+=advance;if(line.position.z>2)line.position.z-=5.2}
+  verticalSpeed-=19*dt;if(swinging&&playerY<3.05)verticalSpeed+=25*dt;if(playerY<.1){playerY=.1;verticalSpeed=0}if(swinging&&playerY>3.1){playerY=3.1;verticalSpeed=Math.min(verticalSpeed,0)}
+  hero.position.x=THREE.MathUtils.damp(hero.position.x,lane*2.15,12,dt);hero.position.y=playerY;body.rotation.z=THREE.MathUtils.damp(body.rotation.z,-(lane*2.15-hero.position.x)*.11,8,dt);body.rotation.x=swinging?-.16:Math.sin(runTime*speed*.8)*.04;
+  legs[0].rotation.x=Math.sin(runTime*speed*.48)*.7;legs[1].rotation.x=-legs[0].rotation.x;
+  hero.userData.arms.forEach((a,i)=>{a.rotation.x=swinging?-.85:Math.sin(runTime*speed*.48+(i?Math.PI:0))*.42;a.rotation.z=swinging?(i===0?-.3:.3):0});
+  camera.position.x=THREE.MathUtils.damp(camera.position.x,hero.position.x*.48,3.2,dt);camera.position.y=THREE.MathUtils.damp(camera.position.y,4.2+playerY*.34,3,dt);camera.lookAt(hero.position.x*.24,1.3+playerY*.23,-8);
+  if(swinging){const ax=hero.position.x+(hero.position.x>0?-4.5:4.5),ay=7,az=-15;webLine.geometry.setFromPoints([new THREE.Vector3(hero.position.x+.25,playerY+1.55,.02),new THREE.Vector3(ax,ay,az)]);webLine.visible=true;webAnchor.position.set(ax,ay,az);webAnchor.visible=true;webAnchor.rotation.y+=dt*2}else{webLine.visible=false;webAnchor.visible=false}
+  distanceEl.textContent=`${Math.floor(distance)} m`;
+ }else{hero.position.y=.1+Math.sin(runTime*1.5)*.045;body.rotation.y=Math.sin(runTime*.45)*.05;camera.lookAt(0,1.25,-8)}
+ if(toastTimer>0){toastTimer-=dt;if(toastTimer<=0)toast.classList.remove('show')}
+ renderer.render(scene,camera)}
+requestAnimationFrame(update);
+window.addEventListener('resize',()=>{camera.aspect=innerWidth/innerHeight;camera.updateProjectionMatrix();renderer.setSize(innerWidth,innerHeight);renderer.setPixelRatio(Math.min(devicePixelRatio,1.7))});
+</script>
+</body>
+</html>
